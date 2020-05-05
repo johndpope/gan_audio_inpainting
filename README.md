@@ -1,6 +1,6 @@
 # Audio inpainting with generative adversarial network
 
-This is the repository for the DAS project `Audio inpainting with Generative Adversarial Networks`. Information about the project can be found in `tex/project_infos/`
+This is the repository for the DAS project `Audio inpainting with Generative Adversarial Networks`. In this project the basic Wasserstein Generative Adversarial Network (WGAN) is compared with a new proposed WGAN architecture using a short-range and a long range neighboring borders to improve the inpainting part. The focus are on gaps in the range of 500ms using three different dataset: PIANO, SOLO and MAESTRO. Detailed information about the project and the dataset can be found in `tex/report/report.pdf` or <https://arxiv.org/abs/2003.07704>. We demonstrate a few samples here <https://blogs.ethz.ch/web-audio-inpainting-gan/>
 
 Please keep this repository as clean as possible and do not commit data nor notebook with excecuted cells.
 
@@ -26,44 +26,86 @@ Please keep this repository as clean as possible and do not commit data nor note
 
 	You may want to use the nogpu version of the packages (`requirements_nogpu.txt`) for you local computer.
 
-4. Download datasets (just made it work for one)
+
+
+## Download and train 'PIANO' dataset
+1. Go to folder
+	```
+	cd code
+	```
 	
+2. Download and make 'PIANO' dataset (<http://deepyeti.ucsd.edu/cdonahue/wavegan/data/mancini_piano.tar.gz>)
+
 	```
 	python download_data.py
 	python make_piano_dataset.py
 	```
+3. Go to folder
+   
+   	```
+	cd code/experiments
+	```
+4. Training basic and extend WGAN model
+   
+   	```
+	python myexperiments-basic-piano.py
+	python myexperiments-extend-piano.py
+	```
 
-5. Launch jupyter
+## Download and train 'SOLO' dataset
+1. Go to folder
+	```
+	cd code
+	```
 	
+2. Download 'SOLO' dataset (<https://www.kaggle.com/zhousl16/solo-audio>)
+3. Make the 'SOLO' dataset
 	```
-	jupyter lab
+	python make_solo_dataset.py
+	```
+4. Go to folder
+   
+   	```
+	cd code/experiments
+	```
+5. Training basic and extend WGAN model
+   
+   	```
+	python myexperiments-basic-solo.py
+	python myexperiments-extend-solo.py
 	```
 
-6. Check the folder notebooks. Do the work.
-
-7. Clean your notebook using the makefile from the `notebooks` folder. This will erease all your outputs of all your notebook. If you do not want this, clean your notebook manually.
+## Download and train 'MAESTRO' dataset
+1. Go to folder
 	```
-	cd notebooks
-	make clean
+	cd code
 	```
-
-## Download and train 'maestro' dataset
-1. Download 'maestro' dataset (<https://magenta.tensorflow.org/datasets/maestro>)
-
+	
+2. Download 'MAESTRO' dataset (<https://magenta.tensorflow.org/datasets/maestro>)
 	```
 	python download_data_maestro.py
 	```
-
-2. The generator to load the 'maestro' dataset is defined here:
-   
+3. Go to folder 
    	```
-	audioinpainting/load_generator.py
+	cd code/experiments
 	```
-
+4. Training basic and extend WGAN model
+   	```
+	python myexperiments-basic-maestro.py
+	python myexperiments-extend-maestro.py
+	```
+## Testing the trained models
+1. Go to folder
+	```
+	cd code/experiments
+	```
+2. Run test script (make sure that the path to the trained model is correct)
+	```
+	python myexperiments-test-model.py
+	```
 
 ## Project general informations
 
-* Meeting time: Thursday 2pm
 * Students: Ebner Pirmin, Amr Eltelt
 * Supervisor: Nathanaël Perraudin
 
